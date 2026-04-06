@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Matthew · DevOps Engineer</title>
+  <!-- Google Fonts + smooth modern base -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #741132 0%, #eef2f9 100%);
+      font-family: 'Inter', sans-serif;
+      color: #0a1e2f;
+      line-height: 1.4;
+      scroll-behavior: smooth;
+    }
+
+    /* subtle animated grain / background ornament */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(#518ed9 0.8px, transparent 0.8px);
+      background-size: 28px 28px;
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 2rem 3rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* header: contact row at top right corner */
+    .top-corner {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 3rem;
+    }
+
+    .contact-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border-radius: 2rem;
+      padding: 0.85rem 1.8rem;
+      box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      align-items: center;
+      font-weight: 500;
+    }
+
+    .contact-card:hover {
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 20px 32px -12px rgba(0, 0, 0, 0.12);
+      border-color: #b9d0f0;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      color: #1e2f44;
+    }
+
+    .contact-item i {
+      font-size: 1.15rem;
+      color: #2c6e9e;
+      width: 1.4rem;
+      text-align: center;
+    }
+
+    .contact-item span {
+      letter-spacing: -0.2px;
+    }
+
+    /* main hero section */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3.5rem;
+      border-bottom: 2px solid rgba(44, 110, 158, 0.2);
+      padding-bottom: 2rem;
+    }
+
+    .name-title h1 {
+      font-size: 3.4rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #0f2b3d, #1f5e8c);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .badge-devops {
+      margin-top: 0.75rem;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      background: #e6f0f9;
+      padding: 0.35rem 1rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #1f5e8c;
+      backdrop-filter: blur(2px);
+      border: 1px solid #cde1f0;
+    }
+
+    .badge i {
+      margin-right: 6px;
+      font-size: 0.8rem;
+    }
+
+    /* summary cards & grid */
+    .stats-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .stat-card {
+      background: white;
+      flex: 1 1 180px;
+      border-radius: 1.8rem;
+      padding: 1.2rem 1rem;
+      text-align: center;
+      box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid #e9edf2;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 28px -12px rgba(0, 32, 64, 0.12);
+      border-color: #cbddee;
+    }
+
+    .stat-number {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #1f6e9e;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      color: #547b97;
+      margin-top: 0.5rem;
+    }
+
+    /* two column layout for main content */
+    .two-columns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .left-col {
+      flex: 2;
+      min-width: 240px;
+    }
+
+    .right-col {
+      flex: 1.4;
+      min-width: 240px;
+    }
+
+    /* section cards */
+    .section-card {
+      background: white;
+      border-radius: 2rem;
+      padding: 1.6rem 1.8rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(200, 218, 235, 0.7);
+      transition: all 0.2s;
+    }
+
+    .section-title {
+      font-size: 1.45rem;
+      font-weight: 600;
+      margin-bottom: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-left: 4px solid #2c6e9e;
+      padding-left: 1rem;
+      color: #0c2f44;
+    }
+
+    .section-title i {
+      color: #2c6e9e;
+      font-size: 1.3rem;
+    }
+
+    .exp-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: baseline;
+      margin-bottom: 0.3rem;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .exp-title {
+      color: #0c4a6e;
+    }
+
+    .exp-date {
+      font-weight: 500;
+      font-size: 0.8rem;
+      color: #6889a6;
+      background: #f0f4fa;
+      padding: 0.2rem 0.7rem;
+      border-radius: 30px;
+    }
+
+    .exp-company {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #547186;
+      margin-bottom: 0.65rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .exp-desc {
+      font-size: 0.9rem;
+      color: #2c3f4f;
+      line-height: 1.45;
+      margin-left: 0.2rem;
+      padding-left: 0.5rem;
+      border-left: 2px solid #dee7f0;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+
+    .skill-tag {
+      background: #eef3fc;
+      border-radius: 32px;
+      padding: 0.4rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #1e5f86;
+      transition: all 0.15s;
+      border: 1px solid #d4e2f0;
+    }
+
+    .skill-tag:hover {
+      background: #e1edf9;
+      transform: scale(0.98);
+      border-color: #9bbeda;
+    }
+
+    .cert-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .cert-item i {
+      width: 1.6rem;
+      color: #2c6e9e;
+      font-size: 1.2rem;
+    }
+
+    hr {
+      margin: 1rem 0;
+      border: 0;
+      height: 1px;
+      background: linear-gradient(90deg, #caddf0, transparent);
+    }
+
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #6c8eaa;
+      border-top: 1px solid #cbdbe2;
+      padding-top: 2rem;
+    }
+
+    /* responsive fine-tune */
+    @media (max-width: 780px) {
+      .container {
+        padding: 1.5rem;
+      }
+      .name-title h1 {
+        font-size: 2.4rem;
+      }
+      .contact-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+        background: rgba(255, 255, 255, 0.95);
+      }
+      .hero {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+    }
+
+    /* a small custom decoration */
+    .glow-text {
+      background: linear-gradient(120deg, #265c7e, #3788b3);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <!-- TOP RIGHT CORNER: contacts (email, phone, location) -->
+  <div class="top-corner">
+    <div class="contact-card">
+      <div class="contact-item">
+        <i class="fas fa-envelope"></i>
+        <span>matteceejay@gmail.com</span>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-phone-alt"></i>
+        <span>919-888-8649</span>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Boston, MA</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero section: name + role / devops vibe -->
+  <div class="hero">
+    <div class="name-title">
+      <h1>Matthew</h1>
+      <div class="badge-devops">
+        <span class="badge"><i class="fas fa-cloud-upload-alt"></i> DevOps Engineer</span>
+        <span class="badge"><i class="fas fa-infinity"></i> CI/CD Architect</span>
+        <span class="badge"><i class="fas fa-cubes"></i> Kubernetes · Terraform</span>
+      </div>
+    </div>
+    <div style="font-size: 0.9rem; color: #4c6e89;">
+      <i class="fas fa-code-branch"></i> infrastructure as code · reliability
+    </div>
+  </div>
+
+  <!-- quick stats: editable years / experience blocks (you can change numbers) -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-number" id="yearsExp">8+</div>
+      <div class="stat-label">YEARS OF EXP.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number" id="prodDeploys">450+</div>
+      <div class="stat-label">PROD DEPLOYS</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number" id="cloudCert">5</div>
+      <div class="stat-label">CLOUD CERTS</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number" id="repoStars">★ 24</div>
+      <div class="stat-label">OPS REPOS</div>
+    </div>
+  </div>
+
+  <!-- Main two columns: experience, skills, certifications, etc -->
+  <div class="two-columns">
+    <!-- LEFT COLUMN: Work experience + projects highlights -->
+    <div class="left-col">
+      <div class="section-card">
+        <div class="section-title">
+          <i class="fas fa-briefcase"></i>
+          <span>Experience</span>
+        </div>
+
+        <!-- Experience 1 - edit year and details easily -->
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-title">Senior DevOps Engineer</span>
+            <span class="exp-date">2022 – Present</span>
+          </div>
+          <div class="exp-company">
+            <i class="fas fa-building"></i> CloudScale Dynamics · Boston, MA (Hybrid)
+          </div>
+          <div class="exp-desc">
+            Architect and maintain multi-region Kubernetes clusters (EKS/AKS). Led GitOps transformation using ArgoCD, reducing deployment failures by 38%. Designed observability stack (Prometheus + Grafana + Loki).
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-title">Cloud Infrastructure Lead</span>
+            <span class="exp-date">2019 – 2022</span>
+          </div>
+          <div class="exp-company">
+            <i class="fas fa-database"></i> NexaLogic · Remote (US)
+          </div>
+          <div class="exp-desc">
+            Migrated legacy monolith to microservices on ECS with Terraform, cut cloud costs by 27%. Implemented advanced CI/CD pipelines (Jenkins → GitHub Actions). Automated backup strategies and disaster recovery.
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-title">Systems Reliability Engineer</span>
+            <span class="exp-date">2017 – 2019</span>
+          </div>
+          <div class="exp-company">
+            <i class="fas fa-server"></i> EdgeHost Solutions · Boston, MA
+          </div>
+          <div class="exp-desc">
+            Built internal CLI tools for automated provisioning (Ansible + Packer). Reduced MTTR by 45% via centralized logging and alerting. Managed on-premise to AWS hybrid architecture.
+          </div>
+        </div>
+
+        <!-- note: you can easily change years / company names -->
+      </div>
+
+      <div class="section-card">
+        <div class="section-title">
+          <i class="fas fa-rocket"></i>
+          <span>Key Projects</span>
+        </div>
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-title">K8s Platform Self-Service Portal</span>
+            <span class="exp-date">2024</span>
+          </div>
+          <div class="exp-desc">
+            Developed internal developer platform (IDP) using Backstage, Kubernetes operators, and Crossplane. Empowered 12+ teams to deploy with built-in security guardrails.
+          </div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-title">Infrastructure cost optimization engine</span>
+            <span class="exp-date">2023</span>
+          </div>
+          <div class="exp-desc">
+            Built Python automation that analyzes AWS usage and suggests RI/Savings Plans, saving $48k/year. Integrated with Slack bot for real-time alerts.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN: Skills, Certifications, DevOps tools & contact short -->
+    <div class="right-col">
+      <div class="section-card">
+        <div class="section-title">
+          <i class="fas fa-code"></i>
+          <span>Core Competencies</span>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">🐳 Docker</span>
+          <span class="skill-tag">☸️ Kubernetes</span>
+          <span class="skill-tag">Terraform</span>
+          <span class="skill-tag">Ansible</span>
+          <span class="skill-tag">AWS/Azure/GCP</span>
+          <span class="skill-tag">CI/CD (GH Actions)</span>
+          <span class="skill-tag">ArgoCD</span>
+          <span class="skill-tag">Prometheus + Grafana</span>
+          <span class="skill-tag">Python/Go</span>
+          <span class="skill-tag">Linux/Unix</span>
+          <span class="skill-tag">GitOps</span>
+          <span class="skill-tag">Helm</span>
+          <span class="skill-tag">Vault</span>
+          <span class="skill-tag">ELK Stack</span>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-title">
+          <i class="fas fa-certificate"></i>
+          <span>Certifications & Awards</span>
+        </div>
+        <div class="cert-item">
+          <i class="fab fa-aws"></i>
+          <span><strong>AWS Certified DevOps Engineer</strong> – Professional (2023)</span>
+        </div>
+        <div class="cert-item">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <span><strong>CKA: Certified Kubernetes Administrator</strong> (2022)</span>
+        </div>
+        <div class="cert-item">
+          <i class="fas fa-terminal"></i>
+          <span><strong>HashiCorp Certified: Terraform Associate</strong> (2024)</span>
+        </div>
+        <div class="cert-item">
+          <i class="fas fa-trophy"></i>
+          <span><strong>DevOps Excellence Award 2023</strong> – CloudScale</span>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-title">
+          <i class="fas fa-globe"></i>
+          <span>Community & Talks</span>
+        </div>
+        <div class="exp-desc" style="margin-bottom: 0.6rem;">
+          <i class="fas fa-microphone-alt"></i> Speaker at "Boston DevOps Days 2024" – GitOps at Scale
+        </div>
+        <div class="exp-desc">
+          <i class="fab fa-github"></i> Maintainer of open-source `kubectl-plugins` collection (1.2k+ stars)
+        </div>
+        <hr>
+        <div style="font-size: 0.85rem; margin-top: 0.7rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <span><i class="fab fa-github"></i> github.com/matthew-devops</span>
+          <span><i class="fab fa-linkedin"></i> linkedin.com/in/matthew-devops</span>
+        </div>
+      </div>
+
+      <!-- a small callout with location/availability -->
+      <div class="section-card" style="background: linear-gradient(115deg, #f0f6fe, white);">
+        <div class="section-title" style="border-left-color: #3e8ab3;">
+          <i class="fas fa-map-pin"></i>
+          <span>Based in Boston · Open to hybrid/remote</span>
+        </div>
+        <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+          <span><i class="fas fa-check-circle" style="color:#2c7a4d;"></i> US Citizen</span>
+          <span><i class="fas fa-clock"></i> EST timezone</span>
+          <span><i class="fas fa-laptop-code"></i> available for consulting</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <i class="fas fa-cogs"></i> designed with <i class="fas fa-heart" style="color:#b33b2c;"></i> by Matthew — automated infrastructure, reliable delivery<br>
+    <!-- editable: last update / note -->
+    <span style="font-size: 0.7rem;">profile version 2.0 · Boston, MA · contact via email or phone</span>
+  </footer>
+</div>
+
+<!-- simple script to make numbers/ years easily modifiable from console or inline? 
+     just for demonstration, we also allow double-click? but mainly user can edit HTML directly,
+     providing extra friendliness: show an editable note? We'll just keep it static but 
+     you can manually update years in stats and experiences without any hassle. 
+     For convenience, i will add data attributes but not needed.
+-->
+</body>
+</html>
