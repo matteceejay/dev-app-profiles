@@ -14,5 +14,5 @@ jobs:
     test:
         runs-on: ubuntu-latest
         steps:
-            - name: hello
-              run: echohello
+            - name: check os version
+              run: echo cat /etc/os-release
