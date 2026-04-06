@@ -12,6 +12,7 @@ jobs:
               run: cat /etc/os-release
 
     test:
+        needs: [build]
         runs-on: ubuntu-latest
         steps:
             - name: check os version
