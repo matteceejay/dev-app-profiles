@@ -6,14 +6,13 @@ jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-            - name: uptime
-              run: uptime
-            - name: OS type
-              run: cat /etc/os-release
+            - name: Check Out Code
+              uses: actions/checkout@v4 #action is used in GitHub Actions workflows to check out (clone) your repository's code onto the runner machine, so the workflow can access it.
 
-    test:
-        needs: [build]
-        runs-on: ubuntu-latest
-        steps:
-            - name: check os version
-              run: echo cat /etc/os-release
+            - name: Build the Image
+              run: docker build -t ceejayme/dev-app-profiles .
+            
+            - name: list the Image
+              run: docker images
+
+            
