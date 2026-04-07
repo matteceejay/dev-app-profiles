@@ -1,4 +1,4 @@
-name: my second pipeling
+name: my second pipeline
 
 on: push
 
@@ -7,12 +7,10 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Check Out Code
-              uses: actions/checkout@v4 #action is used in GitHub Actions workflows to check out (clone) your repository's code onto the runner machine, so the workflow can access it.
+              uses: actions/checkout@v4
 
             - name: Build the Image
               run: docker build -t ceejayme/dev-app-profiles .
             
             - name: list the Image
               run: docker images
-
-            
