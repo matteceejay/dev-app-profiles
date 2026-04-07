@@ -31,7 +31,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: SSH to Linux-Server and run the Container
-              uses: applyboy/ssh-action@v1
+              uses: appleboy/ssh-action@v1
               with:
                 host: ${{ secrets.DEPLOY_HOST}}
                 username: ${{ secrets.DEPLOY_SSH_USERNAME }}
